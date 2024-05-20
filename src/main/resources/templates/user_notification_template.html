@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #d0d0d0;
+            border-radius: 5px;
+        }
+        .message {
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #d0d0d0;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .footer {
+            font-size: .8em;
+            color: #808080;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Opportunity Notification</h2>
+    <div class="message" th:text="${message}">Message goes here</div>
+    <div class="footer">
+        You received this email because you subscribed to receive notifications from UOPP.
+        <br/>
+        To unsubscribe, reply to this email with "Unsubscribe" in the subject line.
+    </div>
+</div>
+</body>
+</html>

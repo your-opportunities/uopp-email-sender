@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: uopp-email-sender
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+  mail: # TODO: specify all configs for real mail server
+    host: localhost
+    username: phello
+    password: uhello
+    port: '4025'
+
+application:
+  rabbitmq:
+    queue: email.queue
