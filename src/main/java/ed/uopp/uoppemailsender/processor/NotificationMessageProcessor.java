@@ -1,7 +1,9 @@
 package ed.uopp.uoppemailsender.processor;
 
+import ed.uopp.uoppemailsender.data.mq.NotificationDTO;
+
 public interface NotificationMessageProcessor {
 
-    void processNotification(Object object);
+    void processNotification(NotificationDTO notificationDTO);
 
 }

@@ -24,6 +24,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.thymeleaf:thymeleaf-spring5:3.1.2.RELEASE'
+    implementation 'com.vladsch.flexmark:flexmark:0.64.8'
+
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     compileOnly 'org.projectlombok:lombok'

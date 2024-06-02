@@ -1,5 +1,6 @@
 package ed.uopp.uoppemailsender.consumer;
 
+import ed.uopp.uoppemailsender.data.mq.NotificationDTO;
 import ed.uopp.uoppemailsender.processor.NotificationMessageProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +20,10 @@ public class NotificationMessageConsumer {
 
     @Retryable(retryFor = Exception.class, maxAttempts = 2, backoff = @Backoff(delay = 1000))
     @RabbitListener(queues = "${application.rabbitmq.queue}")
-    public void consume(Message<?> message) {
-        var payload = message.getPayload();
-        log.info("Received payload {}", payload);
+    public void consume(NotificationDTO notificationDTO) {
+        log.info("Received NotificationDTO for user userId = '{}'", notificationDTO.userId());
 
-        notificationMessageProcessor.processNotification(payload);
+        notificationMessageProcessor.processNotification(notificationDTO);
     }
 
     @Recover

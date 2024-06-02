@@ -18,13 +18,13 @@ public class DefaultEmailService implements EmailService {
     private final JavaMailSender emailSender;
 
     @Override
-    public void sendEmail(Object object) {
-        log.info("Sending something {}", object);
+    public void sendEmail(String emailContent) {
+        log.info("Sending email");
 
         try {
             MimeMessage mimeMessage = emailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
-            mimeMessageHelper.setText(object.toString(), true);
+            mimeMessageHelper.setText(emailContent, true);
             mimeMessageHelper.setTo("test@mail.com");
             mimeMessageHelper.setSubject("Opportunity notification");
             mimeMessageHelper.setFrom("uopp@education.com");

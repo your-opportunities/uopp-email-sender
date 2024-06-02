@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<h1>Шановний модератор,</h1>
+
+<h2>Була створена нова можливість, яку потрібно переглянути:</h2>
+
+<hr>
+<div th:utext="${description}"></div>
+
+<hr>
+
+<p>
+    Ви можете переглянути деталі цієї можливості на нашому веб-сайті:
+    <a th:href="${opportunityLink}">Натисніть тут</a> або
+    безпосередньо на веб-сайті джерела: <a th:href="${opportunitySourceLink}">Натисніть тут</a>.
+</p>
+
+<hr>
+
+<h2>Перейти до профілю модератора:</h2>
+
+<p>
+    <a th:href="${moderatorProfileLink}">Перейти до профілю</a>
+</p>
+
+<hr>
+
+<p>
+    З повагою,<br>
+    Команда UOPP
+</p>
+
+</body>
+</html>
