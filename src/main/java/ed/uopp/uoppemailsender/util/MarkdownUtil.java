@@ -4,7 +4,6 @@ package ed.uopp.uoppemailsender.util;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 
 public final class MarkdownUtil {
     private static final Parser parser = Parser.builder().build();

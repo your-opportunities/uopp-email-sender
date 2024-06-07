@@ -5,6 +5,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,23 +16,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultEmailService implements EmailService {
 
+    @Value("${application.email.encoding}")
+    private String opportunityEncoding;
+    @Value("${application.email.opportunity-notification.from}")
+    private String opportunityNotificationFrom;
+    @Value("${application.email.opportunity-notification.subject}")
+    private String opportunityNotificationSubject;
     private final JavaMailSender emailSender;
 
     @Override
-    public void sendEmail(String emailContent) {
+    public void sendEmail(String emailTo, String emailContent) {
         log.info("Sending email");
 
         try {
             MimeMessage mimeMessage = emailSender.createMimeMessage();
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, opportunityEncoding);
+            mimeMessageHelper.setTo(emailTo);
+            mimeMessageHelper.setFrom(opportunityNotificationFrom);
+            mimeMessageHelper.setSubject(opportunityNotificationSubject);
             mimeMessageHelper.setText(emailContent, true);
-            mimeMessageHelper.setTo("test@mail.com");
-            mimeMessageHelper.setSubject("Opportunity notification");
-            mimeMessageHelper.setFrom("uopp@education.com");
-            // TODO: configure mail sender
             emailSender.send(mimeMessage);
         } catch (MailException | MessagingException e) {
-            log.error("not send");
+            log.error("Email was not send, reason:" + e.getMessage());
         }
     }
 

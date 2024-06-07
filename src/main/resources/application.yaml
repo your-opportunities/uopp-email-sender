@@ -6,7 +6,7 @@ spring:
     port: 5672
     username: user
     password: password
-  mail: # TODO: specify all configs for real mail server
+  mail: # for local env, on prod - specify configs for real mail server
     host: localhost
     username: phello
     password: uhello
@@ -15,3 +15,10 @@ spring:
 application:
   rabbitmq:
     queue: email.queue
+  uopp-spa:
+    moderatorLink: http://localhost:8080/moderator/sign-in
+  email:
+    encoding: utf-8
+    opportunity-notification:
+      from: uopp@education.com
+      subject: Opportunity notification

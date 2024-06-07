@@ -8,11 +8,14 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 @Configuration
 public class ThymeleafConfig {
 
+    public static final String TEMPLATE_RESOLVER_PREFIX = "/templates/";
+    public static final String TEMPLATED_RESOLVER_SUFFIX = ".html";
+
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/templates/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix(TEMPLATE_RESOLVER_PREFIX);
+        templateResolver.setSuffix(TEMPLATED_RESOLVER_SUFFIX);
         return templateResolver;
     }
 

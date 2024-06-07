@@ -21,14 +21,14 @@ public class NotificationMessageConsumer {
     @Retryable(retryFor = Exception.class, maxAttempts = 2, backoff = @Backoff(delay = 1000))
     @RabbitListener(queues = "${application.rabbitmq.queue}")
     public void consume(NotificationDTO notificationDTO) {
-        log.info("Received NotificationDTO for user userId = '{}'", notificationDTO.userId());
+        log.info("Received NotificationDTO for user userId = '{}'. Processing has started.", notificationDTO.userId());
 
         notificationMessageProcessor.processNotification(notificationDTO);
     }
 
     @Recover
     public void recover(Exception ex) {
-        log.error("Failed to process");
+        log.error("Failed to process after retries");
     }
 
 }
