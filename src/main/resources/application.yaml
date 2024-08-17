@@ -16,7 +16,7 @@ application:
   rabbitmq:
     queue: email.queue
   uopp-spa:
-    moderatorLink: http://localhost:8080/moderator/sign-in
+    moderatorLink: http://localhost:8081/moderator/sign-in
   email:
     encoding: utf-8
     opportunity-notification:

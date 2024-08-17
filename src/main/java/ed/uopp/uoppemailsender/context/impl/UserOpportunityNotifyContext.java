@@ -9,10 +9,14 @@ import java.util.UUID;
 public class UserOpportunityNotifyContext extends AbstractOpportunityNotifyContext {
 
     private final UUID subscriptionUuid;
+    private final String description;
+    private final String opportunityLink;
+    private final String opportunitySourceLink;
 
-    public UserOpportunityNotifyContext(String description, String opportunityLink, String opportunitySourceLink, UUID subscriptionUuid) {
-        super(description, opportunityLink, opportunitySourceLink);
+    public UserOpportunityNotifyContext(UUID subscriptionUuid, String description, String opportunityLink, String opportunitySourceLink) {
         this.subscriptionUuid = subscriptionUuid;
+        this.description = description;
+        this.opportunityLink = opportunityLink;
+        this.opportunitySourceLink = opportunitySourceLink;
     }
-
 }

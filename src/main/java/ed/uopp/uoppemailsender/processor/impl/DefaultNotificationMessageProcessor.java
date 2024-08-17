@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import static ed.uopp.uoppemailsender.util.MarkdownUtil.convertMarkdownToHtml;
@@ -31,28 +32,28 @@ public class DefaultNotificationMessageProcessor implements NotificationMessageP
         log.info("Processing NotificationDTO with user userId = '{}'", notificationDTO.userId());
 
         String templateName;
-        AbstractOpportunityNotifyContext context;
+        Context context;
 
         // consider strategies in the future
         switch (notificationDTO.notificationType()) {
             case MODERATOR -> {
                 templateName = MODERATOR_NOTIFICATION_TEMPLATE_CODE;
-                context = new ModeratorOpportunityNotifyContext(
-                        convertMarkdownToHtml(notificationDTO.opportunityText()),
-                        notificationDTO.opportunityLink(),
-                        notificationDTO.opportunitySourceLink(),
-                        moderatorLink
-                );
+                context = new Context();
+                context.setVariable("description",  convertMarkdownToHtml(notificationDTO.opportunityText()));
+                context.setVariable("opportunityLink",  notificationDTO.opportunityLink());
+                context.setVariable("opportunitySourceLink", notificationDTO.opportunitySourceLink());
+                context.setVariable("subscriptionUuid", notificationDTO.subscriptionUuid());
+                context.setVariable("moderatorProfileLink", moderatorLink);
                 log.info("Handling NotificationDTO with user userId = '{}' as 'MODERATOR' type", notificationDTO.userId());
             }
             case USER -> {
                 templateName = USER_NOTIFICATION_TEMPLATE_CODE;
-                context = new UserOpportunityNotifyContext(
-                        convertMarkdownToHtml(notificationDTO.opportunityText()),
-                        notificationDTO.opportunityLink(),
-                        notificationDTO.opportunitySourceLink(),
-                        notificationDTO.subscriptionUuid()
-                );
+                context = new Context();
+                context.setVariable("description",  convertMarkdownToHtml(notificationDTO.opportunityText()));
+                context.setVariable("opportunityLink",  notificationDTO.opportunityLink());
+                context.setVariable("opportunitySourceLink", notificationDTO.opportunitySourceLink());
+                context.setVariable("subscriptionUuid", notificationDTO.subscriptionUuid());
+                context.setVariable("moderatorProfileLink", moderatorLink);
                 log.info("Handling NotificationDTO with user userId = '{}' as 'USER' type", notificationDTO.userId());
             }
             default -> throw new IllegalArgumentException(String.format(
