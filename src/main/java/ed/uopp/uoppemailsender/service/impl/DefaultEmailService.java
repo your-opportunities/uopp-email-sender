@@ -35,7 +35,7 @@ public class DefaultEmailService implements EmailService {
             mimeMessageHelper.setFrom(opportunityNotificationFrom);
             mimeMessageHelper.setSubject(opportunityNotificationSubject);
             mimeMessageHelper.setText(emailContent, true);
-            emailSender.send(mimeMessage);
+//            emailSender.send(mimeMessage);
         } catch (MailException | MessagingException e) {
             log.error("Email was not send, reason:" + e.getMessage());
         }
