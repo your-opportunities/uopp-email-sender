@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 public class DefaultEmailService implements EmailService {
 
     @Value("${application.email.encoding}")
-    private String opportunityEncoding;
+    protected String opportunityEncoding;
     @Value("${application.email.opportunity-notification.from}")
-    private String opportunityNotificationFrom;
+    protected String opportunityNotificationFrom;
     @Value("${application.email.opportunity-notification.subject}")
-    private String opportunityNotificationSubject;
+    protected String opportunityNotificationSubject;
     private final JavaMailSender emailSender;
 
     @Override
